@@ -12,11 +12,15 @@ This repository provides several example projects that demonstrate the capabilit
 
 The examples in this repository are organized into different categories based on their functionality. Each category contains a set of examples that demonstrate a specific feature or use case of the Badger 2040.
 
-### ⚙️ Actions
+### ⚙️ GitHub Actions Workflows
 
 The Actions examples demonstrate how to display GitHub Actions workflows directly on the Badger 2040. This includes processing button presses to navigate through different workflows, viewing their statuses, and updating the E Ink display with the relevant information.
 
-<!-- TODO: add photo of the example -->
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/259c06d8-6532-49a6-a0ac-5d13a281a6ef"
+    alt="Badger2040 - GitHub Actions Workflows App"
+    width="45%"
+/>
 
 ```plaintext
 badger_os/
@@ -32,9 +36,18 @@ badger_os/
 
 ### ✨ Configuration Restoration
 
-The configuration restoration feature allows you to easily restore WiFi and GitHub settings to your Badger 2040. This is particularly useful for quickly switching between different network environments or resetting configurations to a known state.
+The configuration restoration feature allows you to easily restore WiFi and GitHub settings to your Badger 2040. This is particularly useful for quickly switching between different network environments or resetting configurations to a known state, such as using the Badger at home or at work.
 
-<!-- TODO: add photo of the example -->
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/c8c763db-4d9c-4454-a904-78409a8bb55b"
+    alt="Badger2040 - Configuration Restoration App"
+    width="45%"
+/>
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/25172bee-275e-4438-9bfb-f632e8bf2ffd"
+    alt="Badger2040 - Configuration Restoration App"
+    width="45%"
+/>
 
 ```plaintext
 badger_os/
@@ -55,11 +68,42 @@ badger_os/
 
 Simply press the appropriate button on the Badger 2040 to restore the corresponding configuration.
 
-### 🌐 WiFi
+### 🌐 Wireless Connectivity
 
-The WiFi examples demonstrate how to utilize the Badger 2040's wireless capabilities. You can learn how to connect to a WiFi network, perform network operations, and interact with web content.
+The WiFi examples demonstrate how to utilize the Badger 2040's wireless capabilities. You can learn how to connect to a WiFi network, perform network operations, and interact with web content. This includes changing network configurations by setting up an access point for network configuration.
 
-<!-- TODO: add photo of the example -->
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/0e8569a1-63d6-4ac2-b611-49a54cfef813"
+    alt="Badger2040 - Wireless Connectivity - Access Point"
+    width="45%"
+/>
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/583b0290-1c13-402f-81c6-210fb85e1d97"
+    alt="Badger2040 - Wireless Connectivity - Connection"
+    width="45%"
+/>
+
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/6c596051-a62a-42d4-91e9-f83dddae8648"
+    alt="Badger2040 - Wireless Connectivity - WiFi Setup"
+    width="30%"
+/>
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/ae60d7ce-b072-4a19-a2ff-4db552eea22c"
+    alt="Badger2040 - Wireless Connectivity - WiFi Setup"
+    width="30%"
+/>
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/3e8478e2-27d6-459e-a4a8-b6a86a7f8ec5"
+    alt="Badger2040 - Wireless Connectivity - WiFi Setup Successful"
+    width="30%"
+/>
+
+<img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/08c27dc0-8535-4e8a-b1a0-5e36a25744d9"
+    alt="Badger2040 - Wireless Connectivity - Configured"
+    width="45%"
+/>
 
 ```plaintext
 badger_os/
