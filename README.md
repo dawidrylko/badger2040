@@ -17,8 +17,13 @@ The examples in this repository are organized into different categories based on
 The Actions examples demonstrate how to display GitHub Actions workflows directly on the Badger 2040. This includes processing button presses to navigate through different workflows, viewing their statuses, and updating the E Ink display with the relevant information.
 
 <img
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/778c7bc2-d3cf-49c9-9332-d93d831a25fb"
+    alt="Badger2040 - GitHub Actions Workflows App - dawidrylko/badger2040"
+    width="45%"
+/>
+<img
     src="https://github.com/dawidrylko/badger2040/assets/11761319/259c06d8-6532-49a6-a0ac-5d13a281a6ef"
-    alt="Badger2040 - GitHub Actions Workflows App"
+    alt="Badger2040 - GitHub Actions Workflows App - dawidrylko/dawidrylko.com"
     width="45%"
 />
 
