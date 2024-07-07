@@ -10,6 +10,29 @@ This repository provides several example projects that demonstrate the capabilit
 
 The examples in this repository are organized into different categories based on their functionality. Each category contains a set of examples that demonstrate a specific feature or use case of the Badger 2040.
 
+### ✨ Configuration Restoration
+
+Easily restore WiFi and GitHub configurations with the new configuration restoration feature:
+
+```plaintext
+badger_os/
+├── examples/
+│   ├── restore.py
+│   └── icon-restore.png
+└── defaults/
+    ├── WIFI_HOME.py
+    ├── WIFI_WORK.py
+    ├── WIFI_HOTSPOT.py
+    ├── GITHUB_HOME.py
+    └── GITHUB_WORK.py
+```
+
+- `config_restore.py`: Main script to handle restoration of WiFi and GitHub configurations.
+- `WIFI_HOME.py`, `WIFI_WORK.py`, `WIFI_HOTSPOT.py`: Default WiFi configuration files.
+- `GITHUB_HOME.py`, `GITHUB_WORK.py`: Default GitHub configuration files.
+
+Simply press the appropriate button on the Badger 2040 to restore the corresponding configuration.
+
 ### 🌐 WiFi
 
 Explore the wireless connectivity capabilities of the Badger 2040 with the following examples:
