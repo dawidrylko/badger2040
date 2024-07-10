@@ -2,12 +2,12 @@ import gc
 import badger_os
 import badger2040
 import time
-from badger2040 import WIDTH
+from badger2040 import WIDTH, HEIGHT
 import urequests as requests
 from GITHUB_CONFIG import TOKEN, REPOSITORIES
 
 REQUEST_PER_PAGE = 5
-NAVIGATION = "(A) prev | (B) only failures | (C) next | (UP / DOWN) change repo"
+NAVIGATION = ["(A) prev", "(B) refresh", "(C) next", "(UP / DOWN) change repo"]
 
 HEADERS = {
     "User-Agent": "Badger2040-Actions-Display/0.1",
@@ -20,10 +20,19 @@ state = {
     "current_page": 1,
     "current_sub_page": 0,  # 0-4 because REQUEST_PER_PAGE = 5
     "current_repo": 0,
-    "failures_only": False,
 }
 
 badger_os.state_load("actions", state)
+
+
+def truncatestring(text, text_size, width):
+    while True:
+        length = badger.measure_text(text, text_size)
+        if length > 0 and length > width:
+            text = text[:-1]
+        else:
+            text += ""
+            return text
 
 
 def draw_view(repo_owner_name, pagination, lines):
@@ -41,8 +50,19 @@ def draw_view(repo_owner_name, pagination, lines):
     )
 
     badger.set_pen(0)
+    cols = [40, 120, 30, 100]
     for i, line in enumerate(lines):
-        badger.text(line, 5, 16 + (15 // 2) + (i * 15), WIDTH, 1)
+        for j, col in enumerate(line):
+            if badger.measure_text(col, 0.5) > cols[j]:
+                col = truncatestring(col, 0.5, cols[j])
+            badger.text(col, sum(cols[:j]) + 5, 30 + (i * 15), WIDTH, 1)
+
+    badger.set_pen(0)
+    badger.rectangle(0, HEIGHT - 16, WIDTH, 16)
+    badger.set_pen(15)
+    nav = " | ".join(NAVIGATION)
+    badger.text(nav, 3, HEIGHT - 12, WIDTH, 1)
+
     badger.update()
 
 
@@ -61,11 +81,8 @@ def process_workflow_runs(j):
         run_number = f"#{item.get('run_number', 'None')}"
         run_started_at = item.get("run_started_at", "None")
 
-        if len(name) > 20:
-            name = name[:17] + "..."
-
-        formatted_line = " | ".join([conclusion, name, run_number, run_started_at])
-        lines.append(formatted_line)
+        parts = [conclusion, name, run_number, run_started_at]
+        lines.append(parts)
 
     return lines
 
@@ -76,8 +93,6 @@ def get_data(lines=[]):
         "per_page": 1,
         "page": state["current_page"] + state["current_sub_page"],
     }
-    if state["failures_only"]:
-        PARAMS["status"] = "failure"
     repo = REPOSITORIES[state["current_repo"]]
     # Documentation: https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#list-workflow-runs-for-a-repository
     url = f"https://api.github.com/repos/{repo['owner']}/{repo['repo']}/actions/runs?{build_params(PARAMS)}"
@@ -108,7 +123,6 @@ def get_data(lines=[]):
         time.sleep(1)
         get_data(lines)
     else:
-        lines.extend(["", NAVIGATION])
         draw_view(
             f"{repo['owner']}/{repo['repo']}",
             f"Page {state['current_page'] // REQUEST_PER_PAGE + 1}/{total_pages}",
@@ -118,13 +132,6 @@ def get_data(lines=[]):
         badger.led(0)
 
     gc.collect()
-
-
-def toggle_failures():
-    state["failures_only"] = not state["failures_only"]
-    state["current_page"] = 1
-    state["current_sub_page"] = 0
-    badger_os.state_save("actions", state)
 
 
 def update_page(increment):
@@ -163,7 +170,6 @@ while True:
         update_page(-1)
         changed = True
     if badger.pressed(badger2040.BUTTON_B):
-        toggle_failures()
         changed = True
     if badger.pressed(badger2040.BUTTON_C):
         update_page(1)
