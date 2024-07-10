@@ -179,6 +179,7 @@ while True:
         update_page(-1)
         changed = True
     if badger.pressed(badger2040.BUTTON_B):
+        state["current_sub_page"] = 0
         changed = True
     if badger.pressed(badger2040.BUTTON_C):
         update_page(1)
