@@ -17,12 +17,12 @@ The examples in this repository are organized into different categories based on
 The Actions examples demonstrate how to display GitHub Actions workflows directly on the Badger 2040. This includes processing button presses to navigate through different workflows, viewing their statuses, and updating the E Ink display with the relevant information.
 
 <img
-    src="https://github.com/dawidrylko/badger2040/assets/11761319/778c7bc2-d3cf-49c9-9332-d93d831a25fb"
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/65b4375b-1720-4c5e-956f-1ba6a4a488e1"
     alt="Badger2040 - GitHub Actions Workflows App - dawidrylko/badger2040"
     width="45%"
 />
 <img
-    src="https://github.com/dawidrylko/badger2040/assets/11761319/259c06d8-6532-49a6-a0ac-5d13a281a6ef"
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/679f0d0d-9609-4fcc-8bae-14d54bc4af0e"
     alt="Badger2040 - GitHub Actions Workflows App - dawidrylko/dawidrylko.com"
     width="45%"
 />
@@ -89,17 +89,17 @@ The WiFi examples demonstrate how to utilize the Badger 2040's wireless capabili
 />
 
 <img
-    src="https://github.com/dawidrylko/badger2040/assets/11761319/6c596051-a62a-42d4-91e9-f83dddae8648"
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/ef4aad72-e547-4537-90a5-ddda6fdd46df"
     alt="Badger2040 - Wireless Connectivity - WiFi Setup"
     width="30%"
 />
 <img
-    src="https://github.com/dawidrylko/badger2040/assets/11761319/ae60d7ce-b072-4a19-a2ff-4db552eea22c"
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/39810618-dfea-415f-a76b-0f9092b5f21e"
     alt="Badger2040 - Wireless Connectivity - WiFi Setup"
     width="30%"
 />
 <img
-    src="https://github.com/dawidrylko/badger2040/assets/11761319/3e8478e2-27d6-459e-a4a8-b6a86a7f8ec5"
+    src="https://github.com/dawidrylko/badger2040/assets/11761319/0ed97b57-a1c9-4831-95e6-ea248f959f33"
     alt="Badger2040 - Wireless Connectivity - WiFi Setup Successful"
     width="30%"
 />
