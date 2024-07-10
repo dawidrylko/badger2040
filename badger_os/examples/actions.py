@@ -1,7 +1,6 @@
 import gc
 import badger_os
 import badger2040
-import time
 from badger2040 import WIDTH, HEIGHT
 import urequests as requests
 from GITHUB_CONFIG import TOKEN, REPOSITORIES
@@ -26,13 +25,14 @@ badger_os.state_load("actions", state)
 
 
 def truncatestring(text, text_size, width):
-    while True:
-        length = badger.measure_text(text, text_size)
-        if length > 0 and length > width:
-            text = text[:-1]
-        else:
-            text += ""
-            return text
+    if badger.measure_text(text, text_size) <= width:
+        return text
+
+    ellipsis = "..."
+    while badger.measure_text(text + ellipsis, text_size) > width:
+        text = text[:-1]
+
+    return text + ellipsis
 
 
 def draw_view(repo_owner_name, pagination, lines):
@@ -50,7 +50,7 @@ def draw_view(repo_owner_name, pagination, lines):
     )
 
     badger.set_pen(0)
-    cols = [40, 120, 30, 100]
+    cols = [40, 120, 35, 95]
     for i, line in enumerate(lines):
         for j, col in enumerate(line):
             if badger.measure_text(col, 0.5) > cols[j]:
@@ -89,13 +89,19 @@ def process_workflow_runs(j):
 
 def get_data(lines=[]):
     gc.collect()
-    PARAMS = {
+    params = {
         "per_page": 1,
         "page": state["current_page"] + state["current_sub_page"],
     }
-    repo = REPOSITORIES[state["current_repo"]]
+    repo_index = state["current_repo"]
+    if repo_index < 0 or repo_index >= len(REPOSITORIES):
+        print(f"Invalid Repo Index: {repo_index}")
+        reset()
+        draw_view(f"Invalid Repo Index: {repo_index}", "Press (B) to refresh", [])
+        return
+    repo = REPOSITORIES[repo_index]
     # Documentation: https://docs.github.com/en/rest/actions/workflow-runs?apiVersion=2022-11-28#list-workflow-runs-for-a-repository
-    url = f"https://api.github.com/repos/{repo['owner']}/{repo['repo']}/actions/runs?{build_params(PARAMS)}"
+    url = f"https://api.github.com/repos/{repo['owner']}/{repo['repo']}/actions/runs?{build_params(params)}"
     print(f"Requesting URL: {url}")
 
     try:
@@ -115,23 +121,26 @@ def get_data(lines=[]):
 
     except Exception as e:
         print(f"Error: {e}")
+        reset()
+        draw_view(f"Error: {e}", "Press (B) to refresh", [])
     finally:
         r.close()
 
     state["current_sub_page"] += 1
     if state["current_sub_page"] < REQUEST_PER_PAGE:
-        time.sleep(1)
         get_data(lines)
     else:
-        draw_view(
-            f"{repo['owner']}/{repo['repo']}",
-            f"Page {state['current_page'] // REQUEST_PER_PAGE + 1}/{total_pages}",
-            lines,
-        )
         print("Done fetching data")
         badger.led(0)
 
     gc.collect()
+
+
+def reset():
+    state["current_repo"] = 0
+    state["current_page"] = 1
+    state["current_sub_page"] = 0
+    badger_os.state_save("actions", state)
 
 
 def update_page(increment):
